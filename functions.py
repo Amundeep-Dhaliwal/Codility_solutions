@@ -13,3 +13,12 @@ def solution(N):
     lengths = (re.findall(r'1(0+)(?=1)', stringRep))
     rv = len(max(lengths, key = len)) if lengths else 0
     return rv
+
+# Cyclic Rotation
+from collections import deque
+def solution(A, K):
+    dlist = deque(A)
+    dlist.rotate(K)
+    return list(dlist)
+
+
