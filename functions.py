@@ -127,20 +127,6 @@ def solution(S, P, Q):
             result.append(4)
     return result
 
-# Passing Cars
-def solution(A):
-    zero_count = 0
-    combinations = 0
-    for item in A:
-        if item ==0:
-            zero_count += 1
-        else:
-            combinations += zero_count
-        
-        if combinations > 1_000_000_000:
-            return -1
-    return combinations
-
 # Minimum Average Two Slice
 def solution(A):
     min_avg_value = (A[0] + A[1])/2.0
@@ -156,3 +142,45 @@ def solution(A):
         min_avg_value = (A[-1]+A[-2])/2
         min_avg_pos = len(A)-2
     return min_avg_pos
+
+# Passing Cars
+def solution(A):
+    zero_count = 0
+    combinations = 0
+    for item in A:
+        if item ==0:
+            zero_count += 1
+        else:
+            combinations += zero_count
+        
+        if combinations > 1_000_000_000:
+            return -1
+    return combinations
+
+# Distinct
+def solution(A):
+    return len(set(A))
+
+# Max Product Of Three
+def solution(A):
+    A.sort()
+    return max(A[0] * A[1] * A[-1], A[-1]*A[-2]*A[-3])
+
+# Number Of Disc Intersections
+def solution(A): # number of disk intersections solution
+    import bisect
+    if len(A) <= 1:
+        return 0 
+    cuts = [(c-r, c+r) for c, r in enumerate(A)]
+    cuts.sort(key=lambda pair: pair[0]) # sort the tuples based on their first element
+    #print(cuts)
+    lefts, rights = zip(*cuts)
+    total = 0
+    bRight = bisect.bisect_right
+    for i in range(len(A)):
+        r = rights[i] 
+        pos = bRight(lefts, r)
+        total += (pos - i - 1)
+        if total > 10e6:
+            return -1
+    return total
