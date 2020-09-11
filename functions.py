@@ -167,12 +167,12 @@ def solution(A):
     return max(A[0] * A[1] * A[-1], A[-1]*A[-2]*A[-3])
 
 # Number Of Disc Intersections
-def solution(A): # number of disk intersections solution
+def solution(A): 
     import bisect
     if len(A) <= 1:
         return 0 
     cuts = [(c-r, c+r) for c, r in enumerate(A)]
-    cuts.sort(key=lambda pair: pair[0]) # sort the tuples based on their first element
+    cuts.sort(key=lambda pair: pair[0]) 
     #print(cuts)
     lefts, rights = zip(*cuts)
     total = 0
