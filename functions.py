@@ -167,20 +167,26 @@ def solution(A):
     return max(A[0] * A[1] * A[-1], A[-1]*A[-2]*A[-3])
 
 # Number Of Disc Intersections
-def solution(A): 
-    import bisect
-    if len(A) <= 1:
-        return 0 
-    cuts = [(c-r, c+r) for c, r in enumerate(A)]
-    cuts.sort(key=lambda pair: pair[0]) 
-    #print(cuts)
-    lefts, rights = zip(*cuts)
-    total = 0
-    bRight = bisect.bisect_right
+from bisect import bisect_right, bisect_left
+def solution(A):
+    start = [center - radius for center, radius in enumerate(A)]
+    start.sort()
+    pairs = 0
     for i in range(len(A)):
-        r = rights[i] 
-        pos = bRight(lefts, r)
-        total += (pos - i - 1)
-        if total > 10e6:
+        end = i + A[i]
+        count = bisect_right(start,end)-1
+        count_1 = count - i
+        pairs += count_1
+        if pairs > 10_000_000:
             return -1
-    return total
+    return pairs
+
+# Triangle
+def solution(A):
+    if len(A) < 3:
+        return 0
+    A.sort()
+    for i in range(len(A)-2):
+        if A[i] + A[i+1] > A[i+2]:
+            return 1
+    return 0
