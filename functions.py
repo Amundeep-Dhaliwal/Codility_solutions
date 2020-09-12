@@ -190,3 +190,39 @@ def solution(A):
         if A[i] + A[i+1] > A[i+2]:
             return 1
     return 0
+
+# Brackets
+def solution(S):
+    stack = []
+    opening = {'{','[','('}
+    validCombinations = {'()', '[]', '{}'}
+    for bracket in S:
+        if bracket in opening:
+            stack.append(bracket)
+        else:
+            if len(stack) == 0:
+                return 0
+            left = stack.pop()
+            if left+bracket not in validCombinations:
+                return 0
+    if len(stack) != 0:
+        return 0
+    return 1
+
+# Fish
+def solution(A,B):
+    survivals = 0
+    stack = []
+    for index in range(len(A)):
+        if B[index] == 0:
+            while len(stack) != 0:
+                if stack[-1] > A[index]:
+                    break
+                else:
+                    stack.pop()
+            else:
+                survivals += 1
+        else:
+            stack.append(A[index])
+    survivals += len(stack)
+    return survivals
