@@ -226,3 +226,22 @@ def solution(A,B):
             stack.append(A[index])
     survivals += len(stack)
     return survivals
+
+# Nesting
+def solution(S):
+    validCombinations = {'{}','[]','()'}
+    opening = {'(', '{','['}
+    stack = []
+    for bracket in S:
+        if bracket in opening:
+            stack.append(bracket)
+        else:
+            if len(stack) == 0:
+                return 0
+            left = stack.pop()
+            if (left + bracket) not in validCombinations:
+                return 0
+    if len(stack) != 0:
+        return 0
+    else:
+        return 1
