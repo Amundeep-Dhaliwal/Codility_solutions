@@ -27,3 +27,11 @@ def solution(A):
         minCost = min(minCost,cost)
         maxProfit = max(maxProfit,cost-minCost)
     return maxProfit
+
+# Max Slice Sum
+def solution(A):
+    max_ending = max_slice = A[0]
+    for i in range(1,len(A)):
+        max_ending = max(max_ending+A[i],A[i])
+        max_slice = max(max_slice,max_ending)
+    return max_slice
