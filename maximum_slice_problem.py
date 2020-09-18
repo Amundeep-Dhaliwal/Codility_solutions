@@ -7,17 +7,23 @@ def solution(A):
         if total < 0:
             mid =index
             total = 0
-        
         elif total == 0 and A[index-1]>A[mid]:
             mid =index -1
             total = end
-        
         else:
             if A[mid] > end:
                 total+=A[mid]
                 mid = index
             else:
                 total += end
-        
         max_slice = max(max_slice,total)
     return max_slice
+
+# Max Profit
+def solution(A):
+    minCost=200_000
+    maxProfit = 0
+    for cost in A:
+        minCost = min(minCost,cost)
+        maxProfit = max(maxProfit,cost-minCost)
+    return maxProfit
