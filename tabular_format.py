@@ -27,3 +27,5 @@ def solution(A, K):
         print('|')
         lastRep = (len(A)%K) if len(A)%K != 0 else K
         print(('+' + '-'*width)*lastRep +'+')
+
+        
